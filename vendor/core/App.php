@@ -1,15 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 27.06.2018
- * Time: 14:46
- */
+
 
 namespace vendor\core;
 
+use vendor\core\Registry;
 
 class App
 {
+    public static $app;
+
+    /**
+     * App constructor.
+     */
+    public function __construct()
+    {
+        self::$app = Registry::instance();
+    }
+
 
 }

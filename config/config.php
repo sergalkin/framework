@@ -1,7 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 27.06.2018
- * Time: 13:40
- */
+$config = [
+    'components' => [
+        'cache' => 'vendor\libs\Cache',
+        'test' => 'vendor\libs\Test'
+    ]
+];
+return $config;

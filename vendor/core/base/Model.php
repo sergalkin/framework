@@ -69,13 +69,14 @@ abstract class Model
         return $this->pdo->query($sql, $params);
     }
 
+
     /**
      * @param $str
      * @param $field
      * @param string $table
      * @return array
      */
-    public function findLike($str, $field, $table = '')
+    public function findLike($str, $field, $table = '') : array
     {
         $table = $table ?: $this->table;
         $sql = "SELECT * FROM $table WHERE $field LIKE ?";
