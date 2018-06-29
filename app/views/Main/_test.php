@@ -1,7 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 28.06.2018
- * Time: 12:51
- */
+<code><?=__FILE__?></code>
+<h1><?= $post['title']?></h1>
+<div><?= $post['text']?></div>
