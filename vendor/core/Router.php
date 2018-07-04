@@ -61,6 +61,7 @@ class Router
      */
     public static function matchRoute($url)
     {
+
         foreach (self::$routes as $pattern => $route) {
             if (preg_match("#$pattern#i", $url, $matches)) {
                 foreach ($matches as $key => $value) {
@@ -83,6 +84,7 @@ class Router
      * перенаправляет URL по корректному маршруту
      * @param string $url входящий URL
      * @return void
+     * @throws \Exception
      */
     public static function dispatch($url)
     {
@@ -96,14 +98,13 @@ class Router
                     $cObj->$action();
                     $cObj->getView();
                 } else {
-                    echo "Method: <b>$controller::$action</b> not found ";
+                    throw new \Exception("Method: <b>$controller::$action</b> not found", 404);
                 }
             } else {
-                echo "Controller: <b>$controller</b> not found ";
+                throw new \Exception("Controller: <b>$controller</b> not found", 404);
             }
         } else {
-            http_response_code(404);
-            include '404.html';
+            throw new \Exception("Page not found", 404);
         }
     }
 

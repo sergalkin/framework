@@ -1,20 +1,22 @@
 <?php
 
-error_reporting(-1);
-
 use vendor\core\Router;
 use vendor\core\App;
 
 $query = rtrim($_SERVER['QUERY_STRING'], '/');
 
-
+define("DEBUG", 1);
 define('WWW', __DIR__);
 define('CORE', dirname(__DIR__) . '/vendor/core');
 define('ROOT', dirname(__DIR__));
 define('LIBS', dirname(__DIR__) . '/vendor/libs');
 define('APP', dirname(__DIR__) . '/app');
-define('CACHE', dirname(__DIR__) . '/app/tmp/cache');
+define('CACHE', dirname(__DIR__) . '/tmp/cache');
 define('LAYOUT', 'default');
+
+// Const for Default Widgets Layout
+define('WIDGET_MENU', dirname(__DIR__) . '/vendor/widgets/menu/menu_tpl/menu.php');
+define('WIDGET_SELECT', dirname(__DIR__) . '/vendor/widgets/menu/menu_tpl/select.php');
 
 
 require '../vendor/libs/functions.php';
