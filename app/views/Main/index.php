@@ -1,13 +1,13 @@
 <div class="container">
     <button class="btn btn-primary" id="send">Knopka</button>
-    <? new \vendor\widgets\menu\Menu([
+    <? new fw\widgets\menu\Menu([
             'tpl' => WIDGET_MENU,
             'container' => 'ul',
             'class' => 'my-menu',
             'table' => 'categories',
             'cache' => 60
     ]);?>
-    <? new \vendor\widgets\menu\Menu([
+    <? new fw\widgets\menu\Menu([
         'tpl' => WIDGET_SELECT,
         'container' => 'select',
         'class' => 'my-menu',

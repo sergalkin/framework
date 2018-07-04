@@ -2,14 +2,29 @@
 
 namespace app\controllers;
 
-use app\models\Main, vendor\core\App;
-use vendor\core\base\View;
+use app\models\Main;
+use fw\core\App;
+use fw\core\base\View;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use PHPMailer\PHPMailer\PHPMailer;
 
 
 class MainController extends AppController
 {
     public function indexAction()
     {
+/*
+        $log = new Logger('name');
+        $log->pushHandler(new StreamHandler(ROOT . '/tmp/your.log',Logger::WARNING));
+
+        $log->warning('Foo');
+        $log->error('Bar');
+
+
+        $mailer = new PHPMailer();
+        var_dump($mailer);*/
+
         $model = new Main;
         $posts = \R::findAll('posts');
 

@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php \vendor\core\base\View::getMeta();?>
+    <?php \fw\core\base\View::getMeta(); ?>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -12,14 +12,18 @@
 <body>
 
 <div class="container">
-    <ul class="nav">
-        <?php if (!empty($menu)): ?>
+    <?php if (!empty($menu)): ?>
+        <ul class="nav">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/page/about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
             <?php foreach ($menu as $item) : ?>
                 <li class="nav-item"><a class="nav-link" href="category/<?= $item['id']; ?>"><?= $item['title']; ?></a>
                 </li>
             <?php endforeach; ?>
-        <?php endif; ?>
-    </ul>
+        </ul>
+    <?php endif; ?>
+
 
     <h1>Hello, world!</h1>
 
@@ -43,7 +47,7 @@
         crossorigin="anonymous"></script>
 <?php foreach ($scripts as $script) {
     echo $script;
-}?>
+} ?>
 
 </body>
 </html>
