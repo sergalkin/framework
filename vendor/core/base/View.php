@@ -50,23 +50,40 @@ class View
 
     /**
      * @param array $vars
+     * @throws \Exception
      */
     public function render(array $vars)
     {
-        if (is_array($vars)) {
-            extract($vars);
-        }
-
-        $file_view = APP . "/views/{$this->route['controller']}/{$this->view}.php";
         ob_start();
+        $this->setLayout($vars);
+        $content = ob_get_clean();
+        $this->setView($content, $vars);
+    }
+
+    /**
+     * @param array $vars
+     * @throws \Exception
+     */
+    protected function setLayout(array $vars)
+    {
+        extract($vars);
+        $file_view = APP . "/views/{$this->route['prefix']}{$this->route['controller']}/{$this->view}.php";
         if (is_file($file_view) && file_exists($file_view)) {
             require $file_view;
         } else {
-            echo "<p>Не найден вид <b>{$file_view}</b></p>";
+            throw new \Exception("<p>Не найден вид <b>{$file_view}</b></p>", 404);
         }
-        $content = ob_get_clean();
 
+    }
 
+    /**
+     * @param $content
+     * @param array $vars
+     * @throws \Exception
+     */
+    protected function setView($content, array $vars)
+    {
+        extract($vars);
         if (false !== $this->layout) {
             $file_layout = APP . "/views/layouts/{$this->layout}.php";
             if (is_file($file_layout) && file_exists($file_layout)) {
@@ -74,13 +91,12 @@ class View
                 $scripts = [];
                 if (!empty($this->scripts[0])) {
                     $scripts = $this->scripts[0];
-                };
+                }
                 require $file_layout;
             } else {
-                echo "<p>Не найден шаблон <b>{$file_layout}</b></p>";
+                throw new \Exception("<p>Не найден шаблон <b>{$file_layout}</b></p>", 404);
             }
         }
-
     }
 
     protected function getScript($content)
