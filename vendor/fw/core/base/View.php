@@ -151,4 +151,14 @@ class View
         self::$meta['keywords'] = $keywords;
     }
 
+    public function getPart($file)
+    {
+        $file = APP . "/views/{$file}";
+        if (is_file($file) && file_exists($file)) {
+            require_once $file;
+        } else {
+            throw new \Exception("<p>Не найден шаблон <b>{$file_layout}</b></p>", 404);
+        }
+    }
+
 }
