@@ -66,7 +66,7 @@ class View
             "><",
             "><"
         ];
-        return preg_replace($search,$replace,$buffer);
+        return preg_replace($search, $replace, $buffer);
     }
 
     /**
@@ -76,13 +76,15 @@ class View
     public function render(array $vars)
     {
         $this->route['prefix'] = str_replace('\\', '/', $this->route['prefix']);
-        //ob_start([$this, 'compressPage']);
-        ob_start('ob_gzhandler');
-        header("Content-Encoding: gzip");
+        if (DEBUG) {
+            ob_start([$this, 'compressPage']);
+        } else {
+            ob_start('ob_gzhandler');
+            header("Content-Encoding: gzip");
+        }
         $this->setLayout($vars);
         $content = ob_get_contents();
         ob_clean();
-        //$content = ob_get_clean();
         $this->setView($content, $vars);
     }
 

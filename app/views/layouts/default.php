@@ -8,10 +8,17 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <style>
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container bg-dark text-white">
+<div class="container bg-dark text-white" style="height: 100%;">
     <?php include APP . "/views/layouts/navigation.php" ?>
     <?php if (isset($_SESSION['error'])): ?>
         <div class="alert alert-danger">
@@ -25,9 +32,9 @@
             unset($_SESSION['success']); ?>
         </div>
     <?php endif; ?>
-
-    <?= $content; ?>
-
+    <div class="container clearfix">
+        <?= $content; ?>
+    </div>
 
     <? /*= debug(\vendor\core\DB::$queries)*/ ?><!--
 --><? /*= debug(\vendor\core\DB::$countSql)*/ ?>

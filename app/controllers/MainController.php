@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Main;
 use fw\core\App;
 use fw\core\base\View;
+use fw\libs\Pagination;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -14,24 +15,19 @@ class MainController extends AppController
 {
     public function indexAction()
     {
-/*
-        $log = new Logger('name');
-        $log->pushHandler(new StreamHandler(ROOT . '/tmp/your.log',Logger::WARNING));
-
-        $log->warning('Foo');
-        $log->error('Bar');
-
-
-        $mailer = new PHPMailer();
-        var_dump($mailer);*/
-
         $model = new Main;
-        $posts = \R::findAll('posts');
 
+        $total = \R::count('posts');
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $perPage = 1;
+        $pagination = new Pagination($page, $perPage, $total);
+        $start = $pagination->getStart();
+
+        $posts = \R::findAll('posts', "LIMIT $start, $perPage");
         $menu = $this->menu;
         $title = 'PAGE TITLE';
         View::setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
-        $this->set(compact('title', 'posts', 'menu'));
+        $this->set(compact('title', 'posts', 'menu', 'pagination', 'total'));
     }
 
     public function testAction()

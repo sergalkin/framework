@@ -1,4 +1,4 @@
-<ul class="nav bg-dark justify-content-center text-info mt-1">
+<ul class="nav bg-dark justify-content-center text-info">
     <li class="nav-item"><a class="nav-link text-light" href="/">Home</a></li>
     <li class="nav-item"><a class="nav-link text-light" href="/page/about">About</a></li>
     <li class="nav-item"><a class="nav-link text-light" href="/admin">Admin</a></li>
