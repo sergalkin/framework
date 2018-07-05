@@ -48,6 +48,27 @@ class View
         $this->view = $view;
     }
 
+    protected function compressPage($buffer)
+    {
+        $search = [
+            "/(\n)+/",
+            "/\r\n+/",
+            "/\n(\t)+/",
+            "/\n(\ )+/",
+            "/\>(\n)+</",
+            "/\>\r\n</",
+        ];
+        $replace = [
+            "\n",
+            "\n",
+            "\n",
+            "\n",
+            "><",
+            "><"
+        ];
+        return preg_replace($search,$replace,$buffer);
+    }
+
     /**
      * @param array $vars
      * @throws \Exception
@@ -55,9 +76,13 @@ class View
     public function render(array $vars)
     {
         $this->route['prefix'] = str_replace('\\', '/', $this->route['prefix']);
-        ob_start();
+        //ob_start([$this, 'compressPage']);
+        ob_start('ob_gzhandler');
+        header("Content-Encoding: gzip");
         $this->setLayout($vars);
-        $content = ob_get_clean();
+        $content = ob_get_contents();
+        ob_clean();
+        //$content = ob_get_clean();
         $this->setView($content, $vars);
     }
 
