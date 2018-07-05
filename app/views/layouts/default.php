@@ -11,21 +11,20 @@
 </head>
 <body>
 
-<div class="container">
-    <?php if (!empty($menu)): ?>
-        <ul class="nav">
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/page/about">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
-            <?php foreach ($menu as $item) : ?>
-                <li class="nav-item"><a class="nav-link" href="category/<?= $item['id']; ?>"><?= $item['title']; ?></a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+<div class="container bg-dark text-white">
+    <?php include APP . "/views/layouts/navigation.php" ?>
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error'];
+            unset($_SESSION['error']); ?>
+        </div>
     <?php endif; ?>
-
-
-    <h1>Hello, world!</h1>
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success">
+            <?= $_SESSION['success'];
+            unset($_SESSION['success']); ?>
+        </div>
+    <?php endif; ?>
 
     <?= $content; ?>
 

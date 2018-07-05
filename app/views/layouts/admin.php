@@ -12,17 +12,16 @@
 <body>
 
 <div class="container">
-    <ul class="nav">
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/page/about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
-        <?php if (!empty($menu)): ?>
-            <?php foreach ($menu as $item) : ?>
-                <li class="nav-item"><a class="nav-link" href="category/<?= $item['id']; ?>"><?= $item['title']; ?></a>
+    <?php include APP . "/views/layouts/navigation.php" ?>
+
+    <!--    <ul class="nav">
+        <?php /*if (!empty($menu)): */ ?>
+            <?php /*foreach ($menu as $item) : */ ?>
+                <li class="nav-item"><a class="nav-link" href="category/<? /*= $item['id']; */ ?>"><? /*= $item['title']; */ ?></a>
                 </li>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </ul>
+            <?php /*endforeach; */ ?>
+        <?php /*endif; */ ?>
+    </ul>-->
 
     <h1>Админка</h1>
 

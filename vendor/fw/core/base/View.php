@@ -54,6 +54,7 @@ class View
      */
     public function render(array $vars)
     {
+        $this->route['prefix'] = str_replace('\\', '/', $this->route['prefix']);
         ob_start();
         $this->setLayout($vars);
         $content = ob_get_clean();
