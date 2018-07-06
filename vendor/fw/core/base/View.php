@@ -3,6 +3,8 @@
 namespace fw\core\base;
 
 
+use fw\core\App;
+
 class View
 {
     /**
@@ -75,6 +77,7 @@ class View
      */
     public function render(array $vars)
     {
+        Lang::load(App::$app->getProperty('lang'),$this->route);
         $this->route['prefix'] = str_replace('\\', '/', $this->route['prefix']);
         if (DEBUG) {
             ob_start([$this, 'compressPage']);

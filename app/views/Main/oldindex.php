@@ -1,11 +1,11 @@
 <div class="container">
-    <!--    --><? /* new fw\widgets\menu\Menu([
+    <?  new fw\widgets\menu\Menu([
             'tpl' => WIDGET_MENU,
             'container' => 'ul',
             'class' => 'my-menu',
             'table' => 'categories',
             'cache' => 60
-    ]);*/ ?>
+    ]); ?>
     <? new fw\widgets\menu\Menu([
         'tpl' => WIDGET_SELECT,
         'container' => 'select',

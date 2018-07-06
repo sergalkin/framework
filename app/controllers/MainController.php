@@ -14,13 +14,14 @@ class MainController extends AppController
     {
         $model = new Main;
 
-        $total = \R::count('posts');
+        $lang = App::$app->getProperty('lang')['code'];
+        $total = \R::count('posts', 'lang_code = ?', [$lang]);
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $perPage = 2;
         $pagination = new Pagination($page, $perPage, $total);
         $start = $pagination->getStart();
 
-        $posts = \R::findAll('posts', "LIMIT $start, $perPage");
+        $posts = \R::findAll('posts', "lang_code = ? LIMIT $start, $perPage", [$lang]);
 
         View::setMeta('Blog :: Главная страница', 'Описание страницы', 'Ключевые слова');
         $this->set(compact('title', 'posts', 'pagination', 'total'));
